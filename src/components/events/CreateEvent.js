@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-
+import { connect } from 'react-redux';
+import { createEvent } from '../../store/actions/eventActions';
 class CreateEvent extends Component {
 
     state = {
@@ -7,13 +8,14 @@ class CreateEvent extends Component {
         content: ''
     }
 
-    submitFormHandler = (event) => {
-        event.preventDefault();
-        console.log(this.state);
+    submitFormHandler = (e) => {
+        e.preventDefault();
+        //console.log(this.state);
+        this.props.createEvent(this.state);
     }
-    handleChange = (event) => {
+    handleChange = (e) => {
         this.setState({
-            [event.target.id]: event.target.value
+            [e.target.id]: e.target.value
         });
     }
 
@@ -39,4 +41,10 @@ class CreateEvent extends Component {
     }
 }
 
-export default CreateEvent;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        createEvent: (event) => dispatch(createEvent(event))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(CreateEvent);

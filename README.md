@@ -1,5 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+config/fbConfig.js file is not present here
+It contains the firebase Web SDK Config which can be found in your firebase console.
+
 ## Available Scripts
 
 In the project directory, you can run:

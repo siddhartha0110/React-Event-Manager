@@ -8,8 +8,16 @@ const initialState = {
 }
 
 const eventReducer = (state = initialState, action) => {
-
-    return state;
+    switch (action.type) {
+        case 'CREATE_EVENT':
+            console.log('Created Event', action.payload);
+            return state;
+        case 'CREATE_EVENT_ERROR':
+            console.log('Create Error', action.payload);
+            return state;
+        default:
+            return state;
+    }
 }
 
 export default eventReducer;

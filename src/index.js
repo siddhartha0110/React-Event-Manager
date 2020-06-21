@@ -15,11 +15,20 @@ import firebase from 'firebase/app';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk.withExtraArgument({ getFirestore, getFirebase })),
-  reduxFirestore(fbConfig)));
+  reduxFirestore(firebase, fbConfig)));
+
+const profileSpecificProps = {
+  userProfile: 'users',
+  useFirestoreForProfile: true,
+  enableRedirectHandling: true,
+  resetBeforeLogin: false
+}
 
 const rrfProps = {
   firebase,
   config: fbConfig,
+  // eslint-disable-next-line no-dupe-keys
+  config: profileSpecificProps,
   dispatch: store.dispatch,
   createFirestoreInstance
 };

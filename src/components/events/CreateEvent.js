@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { createEvent } from '../../store/actions/eventActions';
+import { Redirect } from 'react-router-dom';
 class CreateEvent extends Component {
 
     state = {
@@ -20,6 +21,11 @@ class CreateEvent extends Component {
     }
 
     render() {
+        const { auth } = this.props;
+        if (!auth.uid) {
+            return <Redirect to="signin" />
+        }
+
         return (
             <div className="container">
                 <form className="white" onSubmit={this.submitFormHandler} >
@@ -41,10 +47,16 @@ class CreateEvent extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        auth: state.firebase.auth
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         createEvent: (event) => dispatch(createEvent(event))
     }
 }
 
-export default connect(null, mapDispatchToProps)(CreateEvent);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateEvent);

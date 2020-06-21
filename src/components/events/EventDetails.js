@@ -3,8 +3,15 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import ContentLoader from 'react-content-loader';
+import { Redirect } from 'react-router-dom';
 
 const EventDetails = (props) => {
+
+    const { auth } = props;
+    if (!auth.uid) {
+        return <Redirect to="/signin" />
+    }
+
     if (!props.event) {
         return (
             <div className="container center">
@@ -50,7 +57,8 @@ const mapStateToProps = (state, props) => {
     const events = state.firestore.data.events;
     const event = events ? events[id] : null
     return {
-        event: event
+        event: event,
+        auth: state.firebase.auth
     }
 }
 

@@ -1,14 +1,23 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { signOut } from '../../store/actions/authActions';
+const SignedInLinks = (props) => {
 
-const SignedInLinks = () => {
     return (
         <ul className='right'>
             <li><NavLink to="/newevent">Add Your Event</NavLink></li>
-            <li><NavLink to="/">Log Out</NavLink></li>
+            <li><a onClick={props.signOut}>Log Out</a></li>
             <li><NavLink to="/" className='btn btn-floating pink lighten-1'>AN</NavLink></li>
         </ul>
     )
 }
 
-export default SignedInLinks;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signOut: () => dispatch(signOut())
+    }
+}
+
+export default connect(null, mapDispatchToProps)(SignedInLinks);

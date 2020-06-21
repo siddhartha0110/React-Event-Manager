@@ -1,5 +1,5 @@
 import React from 'react'
-
+import moment from 'moment';
 const EventSummary = ({ event }) => {
 
     return (
@@ -7,7 +7,9 @@ const EventSummary = ({ event }) => {
             <div className="card-content grey-text text-darken-3">
                 <span className="card-title"> {event.title} </span>
                 <p>Posted By {event.authorFirstName} {event.authorLastName}</p>
-                <p className='grey-text'>19th June,2020</p>
+                <p className='grey-text'>
+                    {moment(event.createdAt.toDate()).calendar()}
+                </p>
             </div>
         </div>
     )

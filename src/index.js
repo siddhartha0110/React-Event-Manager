@@ -20,8 +20,6 @@ const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk.wi
 const profileSpecificProps = {
   userProfile: 'users',
   useFirestoreForProfile: true,
-  enableRedirectHandling: true,
-  resetBeforeLogin: false
 }
 
 const rrfProps = {
@@ -30,7 +28,9 @@ const rrfProps = {
   // eslint-disable-next-line no-dupe-keys
   config: profileSpecificProps,
   dispatch: store.dispatch,
-  createFirestoreInstance
+  createFirestoreInstance,
+  presence: 'presence',
+  sessions: 'sessions'
 };
 
 ReactDOM.render(
